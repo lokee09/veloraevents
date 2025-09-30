@@ -25,6 +25,13 @@ const fileSchema = z.instanceof(File, { message: 'Screenshot is required' }).ref
 );
 
 export async function registerTeam(prevState: any, formData: FormData) {
+  if (!adminDb || !adminStorage) {
+    return {
+      message: 'Server not configured. Please contact support.',
+      errors: {},
+    };
+  }
+
   const validatedFields = registrationSchema.safeParse(Object.fromEntries(formData.entries()));
   const validatedFile = fileSchema.safeParse(formData.get('screenshot'));
 
@@ -81,6 +88,10 @@ export async function registerTeam(prevState: any, formData: FormData) {
 }
 
 export async function createSession(idToken: string) {
+  if (!adminAuth) {
+    console.error('Admin Auth not initialized');
+    return { success: false, error: 'Could not create session. Auth not configured.' };
+  }
   try {
     const expiresIn = 60 * 60 * 24 * 5 * 1000; // 5 days
     const sessionCookie = await adminAuth.createSessionCookie(idToken, { expiresIn });
@@ -98,6 +109,10 @@ export async function clearSession() {
 }
 
 export async function getRegistrationsAsCsv() {
+  if (!adminDb) {
+    console.error('Admin DB not initialized');
+    return null;
+  }
   try {
     const snapshot = await adminDb.collection('registrations').orderBy('createdAt', 'desc').get();
     if (snapshot.empty) {

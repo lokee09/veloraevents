@@ -7,9 +7,24 @@ import { Button } from '@/components/ui/button';
 import { LogOut, Shield } from 'lucide-react';
 import Logo from '@/components/shared/Logo';
 import Link from 'next/link';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {
   const sessionCookie = cookies().get('session')?.value;
+
+  if (!adminAuth) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center">
+        <Alert variant="destructive" className="max-w-md">
+          <AlertTitle>Server Not Configured</AlertTitle>
+          <AlertDescription>
+            The Firebase Admin SDK is not configured correctly. Please check the
+            server logs for more details. Admin features are disabled.
+          </AlertDescription>
+        </Alert>
+      </div>
+    );
+  }
 
   if (!sessionCookie) {
     redirect('/login');
