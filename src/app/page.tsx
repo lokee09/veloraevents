@@ -25,12 +25,12 @@ export default function Home() {
               data-ai-hint={heroImage.imageHint}
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
+          <div className="absolute inset-0 bg-black/60" />
           <div className="relative z-10 p-4 flex flex-col items-center">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-headline font-bold tracking-tighter mb-4 text-shadow-lg animate-fade-in-down">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-headline font-bold tracking-tighter mb-4 text-shadow-lg animate-fade-in-down bg-gradient-to-br from-primary via-primary/80 to-white bg-clip-text text-transparent">
               BATTLEGROUNDS TOURNAMENT
             </h1>
-            <p className="max-w-2xl mx-auto text-lg md:text-xl text-primary-foreground/80 mb-8">
+            <p className="max-w-2xl mx-auto text-lg md:text-xl text-primary-foreground/90 mb-8 text-shadow-lg bg-gradient-to-br from-white/90 via-white/70 to-white/90 bg-clip-text text-transparent">
               The ultimate destination for competitive BGMI tournaments. Assemble your squad, prove your skills, and claim victory.
             </p>
             <Button asChild size="lg" className="font-bold text-lg animate-bounce bg-primary hover:bg-primary/90 text-primary-foreground">
