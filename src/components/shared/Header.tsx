@@ -10,7 +10,7 @@ export default function Header() {
           <Link href="/" className="mr-6 flex items-center space-x-2">
             <Logo />
             <span className="hidden font-bold sm:inline-block font-headline">
-              Battlegrounds Hub
+              VELORA EVENTS
             </span>
           </Link>
         </div>
