@@ -33,7 +33,7 @@ export default function Home() {
             <p className="max-w-2xl mx-auto text-lg md:text-xl text-primary-foreground/90 mb-8 text-shadow-lg bg-gradient-to-br from-white/90 via-white/70 to-white/90 bg-clip-text text-transparent">
               The ultimate destination for competitive BGMI tournaments. Assemble your squad, prove your skills, and claim victory.
             </p>
-            <Button asChild size="lg" className="font-bold text-lg animate-bounce bg-primary hover:bg-primary/90 text-primary-foreground">
+            <Button asChild size="lg" className="font-bold text-lg animate-bounce bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 rounded-full text-white">
               <Link href="/register">Register Now</Link>
             </Button>
           </div>
