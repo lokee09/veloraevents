@@ -84,7 +84,7 @@ export async function registerTeam(prevState: any, formData: FormData) {
 
   revalidatePath('/');
   revalidatePath('/admin');
-  redirect('/');
+  redirect('/status');
 }
 
 export async function createSession(idToken: string) {

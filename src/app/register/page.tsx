@@ -13,6 +13,7 @@ import Link from 'next/link';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import { useToast } from '@/hooks/use-toast';
+import { useRouter } from 'next/navigation';
 
 const qrCodeImage = PlaceHolderImages.find(p => p.id === 'qr-code');
 
@@ -35,6 +36,7 @@ export default function RegisterPage() {
   const [state, formAction] = useActionState(registerTeam, initialState);
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (state?.message && state.errors && Object.keys(state.errors).length > 0) {
@@ -44,8 +46,16 @@ export default function RegisterPage() {
         title: 'Registration Failed',
         description: errorMessages || state.message,
       });
+    } else if (state?.message === '' && Object.keys(state.errors).length === 0 ) {
+      toast({
+          title: 'Registration Successful!',
+          description: 'You can check your status on the status page.',
+      });
+      if (fileInputRef.current) {
+        fileInputRef.current.form?.reset();
+      }
     }
-  }, [state, toast]);
+  }, [state, toast, router]);
 
   return (
     <div className="container mx-auto max-w-3xl py-12 px-4">
