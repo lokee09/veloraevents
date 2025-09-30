@@ -146,3 +146,32 @@ export async function getRegistrationsAsCsv() {
     return null;
   }
 }
+
+export async function getRegistrationByEmail(email: string): Promise<Registration | null> {
+  if (!adminDb) {
+    console.error('Admin DB not initialized');
+    return null;
+  }
+  
+  const emailSchema = z.string().email();
+  const validation = emailSchema.safeParse(email);
+
+  if (!validation.success) {
+    return null;
+  }
+
+  try {
+    const snapshot = await adminDb.collection('registrations').where('email', '==', validation.data).limit(1).get();
+    if (snapshot.empty) {
+      return null;
+    }
+    const doc = snapshot.docs[0];
+    return {
+      id: doc.id,
+      ...doc.data(),
+    } as Registration;
+  } catch (error) {
+    console.error('Error fetching registration by email:', error);
+    return null;
+  }
+}

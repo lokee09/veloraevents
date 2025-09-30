@@ -20,7 +20,7 @@ export default function Header() {
               <Link href="/register">Register</Link>
             </Button>
             <Button asChild>
-              <Link href="/login">Login</Link>
+              <Link href="/status">Check Status</Link>
             </Button>
           </nav>
         </div>
