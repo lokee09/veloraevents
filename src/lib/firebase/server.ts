@@ -9,16 +9,10 @@ import admin from 'firebase-admin';
 //    base64 -i [path to your service account file] -o output.txt
 // 4. Set the base64 string as an environment variable (e.g., FIREBASE_SERVICE_ACCOUNT_KEY).
 
-let _adminApp: admin.App | null = null;
-
-function getAdminApp() {
-  if (_adminApp) {
-    return _adminApp;
-  }
-
+// This function ensures there's a single initialized Firebase Admin app.
+function initializeAdminApp() {
   if (admin.apps.length > 0) {
-    _adminApp = admin.apps[0]!;
-    return _adminApp;
+    return admin.apps[0] as admin.App;
   }
 
   const serviceAccountKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
@@ -35,32 +29,31 @@ function getAdminApp() {
       Buffer.from(serviceAccountKey, 'base64').toString('utf-8')
     );
 
-    _adminApp = admin.initializeApp({
+    return admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
       storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
     });
-    return _adminApp;
   } catch (error: any) {
     console.error('Firebase admin initialization error', error.stack);
-    // Re-throwing the error is important to avoid silent failures.
-    throw new Error('Failed to initialize Firebase Admin SDK.');
+    // Throwing an error is important to avoid silent failures.
+    throw new Error('Failed to initialize Firebase Admin SDK. Check server logs for details.');
   }
 }
 
 function getAdminAuth() {
-  const app = getAdminApp();
+  const app = initializeAdminApp();
   if (!app) return null;
   return app.auth();
 }
 
 function getAdminDb() {
-  const app = getAdminApp();
+  const app = initializeAdminApp();
   if (!app) return null;
   return app.firestore();
 }
 
 function getAdminStorage() {
-  const app = getAdminApp();
+  const app = initializeAdminApp();
   if (!app) return null;
   return app.storage();
 }
