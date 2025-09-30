@@ -15,7 +15,7 @@ export default function Footer() {
             <Link href="#" className="text-muted-foreground hover:text-primary">
               <Twitter className="h-5 w-5" />
             </Link>
-            <Link href="#" className="text-muted-foreground hover:text-primary">
+            <Link href="https://www.instagram.com/veloraa.events?igsh=MXJoanZsMjh3Zm1kMg%3D%3D&utm_source=qr" className="text-muted-foreground hover:text-primary" target="_blank">
               <Instagram className="h-5 w-5" />
             </Link>
             <Link href="#" className="text-muted-foreground hover:text-primary">
