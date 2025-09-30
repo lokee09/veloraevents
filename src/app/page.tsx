@@ -11,35 +11,35 @@ const heroImage = PlaceHolderImages.find(p => p.id === 'hero');
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-background">
       <Header />
       <main className="flex-1">
-        <section className="relative w-full h-[60vh] md:h-[80vh] flex items-center justify-center text-center text-white">
+        <section className="relative w-full h-[70vh] md:h-[90vh] flex items-center justify-center text-center text-white overflow-hidden">
           {heroImage && (
             <Image
               src={heroImage.imageUrl}
               alt={heroImage.description}
               fill
-              className="object-cover object-top"
+              className="object-cover object-center scale-105"
               priority
               data-ai-hint={heroImage.imageHint}
             />
           )}
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
           <div className="relative z-10 p-4 flex flex-col items-center">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-headline font-bold tracking-tighter mb-4 text-shadow-lg animate-fade-in-down">
               BATTLEGROUNDS TOURNAMENT
             </h1>
-            <p className="max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground mb-8">
+            <p className="max-w-2xl mx-auto text-lg md:text-xl text-primary-foreground/80 mb-8">
               The ultimate destination for competitive BGMI tournaments. Assemble your squad, prove your skills, and claim victory.
             </p>
-            <Button asChild size="lg" className="font-bold text-lg animate-bounce">
+            <Button asChild size="lg" className="font-bold text-lg animate-bounce bg-primary hover:bg-primary/90 text-primary-foreground">
               <Link href="/register">Register Now</Link>
             </Button>
           </div>
         </section>
 
-        <section id="features" className="py-12 md:py-20 bg-background">
+        <section id="features" className="py-16 md:py-24 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-headline font-bold">Why Compete With Us?</h2>
@@ -78,7 +78,7 @@ export default function Home() {
 
 function FeatureCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
   return (
-    <Card className="bg-card/50 border-border/50 text-center hover:scale-105 transition-transform duration-300">
+    <Card className="bg-card text-center hover:border-primary/80 transition-all duration-300 transform hover:-translate-y-2">
       <CardHeader className="flex items-center">
         <div className="p-4 bg-primary/10 rounded-full mb-4">
           {icon}
