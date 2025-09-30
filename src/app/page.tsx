@@ -28,7 +28,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/60" />
           <div className="relative z-10 p-4 flex flex-col items-center">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-headline font-bold tracking-tighter mb-4 text-shadow-lg animate-fade-in-down">
-              Battlegrounds Tournament Hub
+              BATTLEGROUNDS TOURNAMENT
             </h1>
             <p className="max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground mb-8">
               The ultimate destination for competitive BGMI tournaments. Assemble your squad, prove your skills, and claim victory.
