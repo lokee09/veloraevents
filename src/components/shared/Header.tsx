@@ -15,9 +15,12 @@ export default function Header() {
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-end space-x-2">
-          <nav className="flex items-center">
+          <nav className="flex items-center gap-2">
+            <Button asChild variant="ghost">
+              <Link href="/register">Register</Link>
+            </Button>
             <Button asChild>
-              <Link href="/register">Register Now</Link>
+              <Link href="/login">Login</Link>
             </Button>
           </nav>
         </div>
