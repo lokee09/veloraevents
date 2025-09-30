@@ -1,3 +1,16 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero",
+      "description": "An esports gamer with a headset on, looking intensely at a screen in a dark room with neon lights.",
+      "imageUrl": "https://images.unsplash.com/photo-1632318901408-b9322722abac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxlc3BvcnRzJTIwZ2FtZXJ8ZW58MHx8fHwxNzU5MjQ1OTE5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "esports gamer"
+    },
+    {
+      "id": "qr-code",
+      "description": "A placeholder QR code for payments.",
+      "imageUrl": "https://images.unsplash.com/photo-1550482781-48d477e61c72?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxxciUyMGNvZGV8ZW58MHx8fHwxNzU5MjI2OTM4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "qr code"
+    }
+  ]
 }
