@@ -8,9 +8,9 @@
     },
     {
       "id": "qr-code",
-      "description": "A placeholder QR code for payments.",
-      "imageUrl": "https://images.unsplash.com/photo-1550482781-48d477e61c72?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxxciUyMGNvZGV8ZW58MHx8fHwxNzU5MjI2OTM4fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "qr code"
+      "description": "A PhonePe QR code for payments.",
+      "imageUrl": "https://i.imgur.com/g6sE1fC.png",
+      "imageHint": "phonepe qr code"
     }
   ]
 }
