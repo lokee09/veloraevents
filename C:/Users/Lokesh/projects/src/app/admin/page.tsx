@@ -3,7 +3,6 @@ import type { Registration } from '@/lib/types';
 import { columns } from './components/columns';
 import { ClientPage } from './components/client-page';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { RegistrationToggle } from './components/registration-toggle';
 import { getRegistrationStatus } from '@/lib/actions';
 
 // This is the key change to prevent build-time prerendering
