@@ -1,30 +1,31 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
+import { Inter, Space_Grotesk } from 'next/font/google';
+import './globals.css';
+import { ThemeProvider } from '@/context/ThemeContext';
+import { Navbar } from '@/components/shared/Navbar';
+import { Toaster } from '@/components/ui/toaster';
 
-import "./globals.css";
-import { Header } from "./components";
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space-grotesk' });
 
 export const metadata: Metadata = {
-  title: "Next.js on Firebase App Hosting",
-  description: "",
+  title: 'Tournament Hub',
+  description: 'The ultimate destination for competitive tournaments.',
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" className="dark-theme">
-      <head>
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
       <body>
-        <div className="dots" />
-        <Header />
-        {children}
-        <div className="bottom-gradient" />
+        <ThemeProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );
