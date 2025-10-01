@@ -3,6 +3,8 @@ import type { Registration } from '@/lib/types';
 import { columns } from './components/columns';
 import { ClientPage } from './components/client-page';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { RegistrationToggle } from './components/registration-toggle';
+import { getRegistrationStatus } from '@/lib/actions';
 
 // This is the key change to prevent build-time prerendering
 export const dynamic = 'force-dynamic';
@@ -41,10 +43,11 @@ export default async function AdminPage() {
     )
   }
   const registrations = await getRegistrations();
+  const registrationStatus = await getRegistrationStatus();
 
   return (
     <div className="container mx-auto">
-      <ClientPage data={registrations} columns={columns} />
+      <ClientPage data={registrations} columns={columns} initialRegistrationStatus={registrationStatus} />
     </div>
   );
 }
