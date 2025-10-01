@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
-      <body>
+      <body className="dark">
         <ThemeProvider>
           <Navbar />
           <main>{children}</main>

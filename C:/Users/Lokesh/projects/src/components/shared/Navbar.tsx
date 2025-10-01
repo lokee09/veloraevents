@@ -1,13 +1,11 @@
 'use client';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { useTheme } from '@/context/ThemeContext';
-import { Gamepad2, Trophy, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import Logo from './Logo';
 
 export function Navbar() {
-  const { theme, setTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
@@ -27,27 +25,14 @@ export function Navbar() {
         </Link>
         <nav className="hidden md:flex flex-1 items-center space-x-6 text-sm font-medium">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="text-foreground/60 transition-colors hover:text-foreground/80">
+            <Link key={link.href} href={link.href} className="text-foreground/60 transition-colors hover:text-primary">
               {link.label}
             </Link>
           ))}
         </nav>
         <div className="flex flex-1 items-center justify-end space-x-2">
-          <Button
-            variant={theme === 'esports' ? 'default' : 'outline'}
-            size="icon"
-            onClick={() => setTheme('esports')}
-            aria-label="Esports mode"
-          >
-            <Gamepad2 className="h-5 w-5" />
-          </Button>
-          <Button
-            variant={theme === 'sports' ? 'default' : 'outline'}
-            size="icon"
-            onClick={() => setTheme('sports')}
-            aria-label="Sports mode"
-          >
-            <Trophy className="h-5 w-5" />
+          <Button asChild>
+            <Link href="/register">Register Now</Link>
           </Button>
           <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -61,7 +46,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-foreground/80 transition-colors hover:text-foreground"
+                className="text-foreground/80 transition-colors hover:text-primary"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.label}

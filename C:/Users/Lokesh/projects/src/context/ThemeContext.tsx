@@ -11,13 +11,14 @@ interface ThemeContextProps {
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('sports');
+  const [theme, setTheme] = useState<Theme>('esports');
 
   useEffect(() => {
     const root = window.document.documentElement;
     if (theme === 'esports') {
       root.classList.add('dark');
     } else {
+      // This part is not really used anymore but kept for potential future use
       root.classList.remove('dark');
     }
   }, [theme]);

@@ -8,22 +8,23 @@ export default function Footer() {
   return (
     <footer className="bg-card border-t border-border/40">
       <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start">
              <Link href="/" className="flex items-center space-x-2 mb-4">
                 <Logo />
                 <span className="font-bold font-headline">Tournament Hub</span>
             </Link>
-            <p className="text-sm text-muted-foreground text-center md:text-left">
+            <p className="text-sm text-muted-foreground">
               The ultimate destination for competitive tournaments.
             </p>
           </div>
           <div className="flex flex-col items-center">
             <h3 className="font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-center">
+            <ul className="space-y-2">
               <li><Link href="#tournaments" className="text-sm text-muted-foreground hover:text-primary">Tournaments</Link></li>
               <li><Link href="#leaderboard" className="text-sm text-muted-foreground hover:text-primary">Leaderboard</Link></li>
               <li><Link href="/register" className="text-sm text-muted-foreground hover:text-primary">Register</Link></li>
+              <li><Link href="/admin" className="text-sm text-muted-foreground hover:text-primary">Admin</Link></li>
             </ul>
           </div>
           <div className="flex flex-col items-center md:items-end">
