@@ -1,3 +1,4 @@
+
 export type Tournament = {
   id: string;
   name: string;
@@ -11,4 +12,17 @@ export type LeaderboardEntry = {
   team: string;
   player: string;
   score: number;
+};
+
+export type Registration = {
+  id: string;
+  fullName: string;
+  ign: string;
+  bgmiUid: string;
+  teamName: string;
+  email: string;
+  phone: string;
+  transactionId: string;
+  screenshotUrl: string;
+  createdAt: number;
 };
