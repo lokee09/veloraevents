@@ -11,7 +11,7 @@ interface ThemeContextProps {
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('esports');
+  const [theme, setTheme] = useState<Theme>('sports');
 
   useEffect(() => {
     const root = window.document.documentElement;

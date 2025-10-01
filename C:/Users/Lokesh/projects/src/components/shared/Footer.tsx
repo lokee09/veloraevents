@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Gamepad2, Trophy, Twitter, Instagram } from 'lucide-react';
+import { Twitter, Instagram } from 'lucide-react';
 import Logo from './Logo';
 
 export default function Footer() {

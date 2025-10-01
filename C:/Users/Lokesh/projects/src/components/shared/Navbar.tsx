@@ -2,9 +2,8 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/context/ThemeContext';
-import { Gamepad2, Trophy, Shield, Menu, X } from 'lucide-react';
+import { Gamepad2, Trophy, Menu, X } from 'lucide-react';
 import { useState } from 'react';
-import { cn } from '@/lib/utils';
 import Logo from './Logo';
 
 export function Navbar() {

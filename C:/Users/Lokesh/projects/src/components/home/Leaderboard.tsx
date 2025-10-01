@@ -4,15 +4,10 @@ import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '@/lib/firebase/config';
 import { useTheme } from '@/context/ThemeContext';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
+import type { LeaderboardEntry } from '@/lib/types';
 
-interface LeaderboardEntry {
-  id: string;
-  team: string;
-  player: string;
-  score: number;
-}
 
 export function Leaderboard() {
   const { theme } = useTheme();
@@ -41,7 +36,7 @@ export function Leaderboard() {
   }, []);
 
   return (
-    <section id="leaderboard" className="py-16 md:py-24">
+    <section id="leaderboard" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold">Leaderboard</h2>
@@ -63,10 +58,10 @@ export function Leaderboard() {
                 {loading ? (
                   Array.from({ length: 5 }).map((_, i) => (
                     <TableRow key={i}>
-                      <TableCell><Skeleton className="h-5 w-10" /></TableCell>
-                      <TableCell><Skeleton className="h-5 w-32" /></TableCell>
-                      <TableCell><Skeleton className="h-5 w-24" /></TableCell>
-                      <TableCell className="text-right"><Skeleton className="h-5 w-16 ml-auto" /></TableCell>
+                      <TableCell><Skeleton className="h-5 w-10 rounded-md" /></TableCell>
+                      <TableCell><Skeleton className="h-5 w-32 rounded-md" /></TableCell>
+                      <TableCell><Skeleton className="h-5 w-24 rounded-md" /></TableCell>
+                      <TableCell className="text-right"><Skeleton className="h-5 w-16 ml-auto rounded-md" /></TableCell>
                     </TableRow>
                   ))
                 ) : leaderboard.length > 0 ? (

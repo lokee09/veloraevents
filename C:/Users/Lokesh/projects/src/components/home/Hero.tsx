@@ -21,15 +21,15 @@ export function Hero() {
     },
   };
 
-  const currentContent = content[theme];
+  const currentContent = theme === 'esports' ? content.esports : content.sports;
 
   return (
     <section
       className={cn(
         'relative flex h-[80vh] w-full flex-col items-center justify-center text-center transition-all duration-500',
         theme === 'esports'
-          ? 'bg-gradient-to-b from-background to-indigo-950/50 text-slate-100'
-          : 'bg-gradient-to-b from-green-50 to-white'
+          ? 'bg-background text-foreground'
+          : 'bg-gradient-to-b from-green-50 to-background'
       )}
     >
       {theme === 'esports' && (

@@ -5,13 +5,8 @@ import { db } from '@/lib/firebase/config';
 import { useTheme } from '@/context/ThemeContext';
 import { TournamentCard } from './TournamentCard';
 import { Skeleton } from '../ui/skeleton';
+import type { Tournament } from '@/lib/types';
 
-interface Tournament {
-  id: string;
-  name: string;
-  description: string;
-  type: 'esports' | 'sports';
-}
 
 export function Tournaments() {
   const { theme } = useTheme();
@@ -19,6 +14,7 @@ export function Tournaments() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     const q = query(collection(db, 'tournaments'), where('type', '==', theme));
     const unsubscribe = onSnapshot(
       q,
@@ -40,7 +36,7 @@ export function Tournaments() {
   }, [theme]);
 
   return (
-    <section id="tournaments" className="py-16 md:py-24 bg-background/80">
+    <section id="tournaments" className="py-16 md:py-24 bg-secondary/50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold">Upcoming Tournaments</h2>
@@ -49,11 +45,12 @@ export function Tournaments() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {loading ? (
             Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="flex flex-col space-y-3">
-                    <Skeleton className="h-[125px] w-full rounded-xl" />
+                <div key={i} className="flex flex-col space-y-3 p-4 border rounded-lg">
+                    <Skeleton className="h-40 w-full rounded-xl" />
                     <div className="space-y-2">
-                        <Skeleton className="h-4 w-3/4" />
-                        <Skeleton className="h-4 w-1/2" />
+                        <Skeleton className="h-6 w-3/4" />
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-2/3" />
                     </div>
                 </div>
             ))
