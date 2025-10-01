@@ -1,25 +1,19 @@
 import admin from 'firebase-admin';
 
-// Important: Your Firebase service account key should be stored securely
-// as an environment variable, not committed to version control.
-// 1. Go to your Firebase Project Settings -> Service accounts.
-// 2. Click "Generate new private key" and save the JSON file.
-// 3. Encode the contents of the JSON file to a base64 string.
-//    You can use an online tool or a command like:
-//    base64 -i [path to your service account file] -o output.txt
-// 4. Set the base64 string as an environment variable (e.g., FIREBASE_SERVICE_ACCOUNT_KEY).
-
-// This function ensures there's a single initialized Firebase Admin app.
-function initializeAdminApp() {
+// This function ensures there's a single initialized Firebase Admin app per request.
+function getAdminApp() {
+  // If an app is already initialized, return it.
   if (admin.apps.length > 0) {
     return admin.apps[0] as admin.App;
   }
 
+  // Otherwise, initialize a new one.
   const serviceAccountKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
 
   if (!serviceAccountKey) {
+    // This warning is crucial for debugging deployment issues.
     console.warn(
-      'FIREBASE_SERVICE_ACCOUNT_KEY is not set. Admin features will be disabled.'
+      'FIREBASE_SERVICE_ACCOUNT_KEY is not set. Admin features will be disabled. This is expected in client-side rendering but is an error on the server.'
     );
     return null;
   }
@@ -29,33 +23,33 @@ function initializeAdminApp() {
       Buffer.from(serviceAccountKey, 'base64').toString('utf-8')
     );
 
+    // Initialize the app with the service account and storage bucket.
     return admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
       storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
     });
   } catch (error: any) {
-    console.error('Firebase admin initialization error', error.stack);
-    // Throwing an error is important to avoid silent failures.
+    console.error('Firebase admin initialization error:', error.stack);
+    // In a serverless environment, throwing an error is better than failing silently.
     throw new Error('Failed to initialize Firebase Admin SDK. Check server logs for details.');
   }
 }
 
+// Getter functions that ensure the app is initialized before returning the service.
+// This is a more reliable pattern for serverless environments like Vercel.
 function getAdminAuth() {
-  const app = initializeAdminApp();
-  if (!app) return null;
-  return app.auth();
+  const app = getAdminApp();
+  return app ? app.auth() : null;
 }
 
 function getAdminDb() {
-  const app = initializeAdminApp();
-  if (!app) return null;
-  return app.firestore();
+  const app = getAdminApp();
+  return app ? app.firestore() : null;
 }
 
 function getAdminStorage() {
-  const app = initializeAdminApp();
-  if (!app) return null;
-  return app.storage();
+  const app = getAdminApp();
+  return app ? app.storage() : null;
 }
 
 export const adminAuth = getAdminAuth();
