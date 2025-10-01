@@ -1,19 +1,50 @@
-// This is a placeholder for the admin page.
-// You can build out the admin functionality here.
+import { adminDb } from '@/lib/firebase/server';
+import type { Registration } from '@/lib/types';
+import { columns } from './components/columns';
+import { ClientPage } from './components/client-page';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+// This is the key change to prevent build-time prerendering
+export const dynamic = 'force-dynamic';
 
-export default function AdminPage() {
+async function getRegistrations(): Promise<Registration[]> {
+  if (!adminDb) {
+    console.warn("Admin DB not initialized. Cannot fetch registrations.");
+    return [];
+  }
+  try {
+    const snapshot = await adminDb.collection('registrations').orderBy('createdAt', 'desc').get();
+    if (snapshot.empty) {
+      return [];
+    }
+    return snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data(),
+    } as Registration));
+  } catch (error) {
+    console.error("Error fetching registrations: ", error);
+    return [];
+  }
+}
+
+export default async function AdminPage() {
+  if (!adminDb) {
+    return (
+        <div className="container mx-auto">
+            <Alert variant="destructive">
+                <AlertTitle>Server Not Configured</AlertTitle>
+                <AlertDescription>
+                    The Firebase Admin SDK is not configured correctly, so registrations cannot be displayed.
+                </AlertDescription>
+            </Alert>
+        </div>
+    )
+  }
+  const registrations = await getRegistrations();
+
   return (
-    <div className="container mx-auto py-12 px-4">
-      <Card>
-        <CardHeader>
-          <CardTitle>Admin Dashboard</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p>Welcome to the Admin Dashboard. Functionality to manage tournaments and leaderboards can be built here.</p>
-        </CardContent>
-      </Card>
+    <div className="container mx-auto">
+      <ClientPage data={registrations} columns={columns} />
     </div>
   );
 }
