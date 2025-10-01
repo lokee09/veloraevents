@@ -97,6 +97,25 @@ export async function registerTeam(prevState: any, formData: FormData) {
    return { message: '', errors: {} };
 }
 
+export async function deleteRegistration(id: string) {
+    if (!adminDb) {
+      console.error('Admin DB not initialized');
+      throw new Error('Server not configured');
+    }
+    if (!id) {
+        throw new Error('Registration ID is required');
+    }
+
+    try {
+        await adminDb.collection('registrations').doc(id).delete();
+        revalidatePath('/admin');
+        return { success: true };
+    } catch (error) {
+        console.error("Error deleting registration: ", error);
+        throw new Error('Failed to delete registration');
+    }
+}
+
 export async function createSession(idToken: string) {
   if (!adminAuth) {
     console.error('Admin Auth not initialized');
